@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendations - Herbal Recommendation System{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>Herbal Recommendations</h1>
+    <p>Curated herb suggestions based on your selected condition</p>
+</section>
+
+<section class="filter-section">
+    <label for="disease-filter">Filter by Disease:</label>
+    <select id="disease-filter" class="select-input">
+        <option value="">All Diseases</option>
+        {% for disease in diseases %}
+        <option value="{{ disease.id }}" {% if selected_disease == disease.id %}selected{% endif %}>
+            {{ disease.name }}
+        </option>
+        {% endfor %}
+    </select>
+</section>
+
+<section class="recommendation-list">
+    {% if recommendations %}
+        {% for rec in recommendations %}
+        <div class="recommendation-card">
+            <div class="rec-herb-info">
+                <span class="herb-emoji large">{{ rec.herb.emoji }}</span>
+                <div>
+                    <h3>{{ rec.herb.name }}</h3>
+                    <p class="herb-scientific"><em>{{ rec.herb.scientific_name }}</em></p>
+                    <span class="badge">{{ rec.disease_name }}</span>
+                </div>
+            </div>
+            <div class="rec-details">
+                <div class="rec-detail">
+                    <strong>Dosage:</strong> {{ rec.dosage }}
+                </div>
+                <div class="rec-detail">
+                    <strong>Preparation:</strong> {{ rec.preparation }}
+                </div>
+                <div class="rec-detail">
+                    <strong>Effectiveness:</strong>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ rec.effectiveness }}%"></div>
+                    </div>
+                    <span>{{ rec.effectiveness }}%</span>
+                </div>
+            </div>
+            <a href="{{ url_for('herb', herb_id=rec.herb.id) }}" class="btn btn-sm">View Details</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <span class="empty-icon">🌿</span>
+            <h3>No recommendations found</h3>
+            <p>Select a disease from the dropdown or browse our disease catalog.</p>
+            <a href="{{ url_for('disease') }}" class="btn btn-primary">Browse Diseases</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.getElementById('disease-filter').addEventListener('change', function() {
+        const diseaseId = this.value;
+        const url = diseaseId
+            ? "{{ url_for('recommendation') }}?disease=" + diseaseId
+            : "{{ url_for('recommendation') }}";
+        window.location.href = url;
+    });
+</script>
+{% endblock %}

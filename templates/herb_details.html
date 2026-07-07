@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}{{ herb.name }} - Herb Details{% endblock %}
+
+{% block content %}
+{% if herb %}
+<section class="herb-detail-page">
+    <div class="herb-detail-header">
+        <span class="herb-emoji xl">{{ herb.emoji }}</span>
+        <div>
+            <h1>{{ herb.name }}</h1>
+            <p class="herb-scientific"><em>{{ herb.scientific_name }}</em></p>
+            <div class="herb-tags">
+                <span class="badge">{{ herb.taste }}</span>
+                <span class="badge badge-outline">{{ herb.category }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="herb-detail-grid">
+        <div class="detail-card">
+            <h3>Description</h3>
+            <p>{{ herb.description }}</p>
+        </div>
+        <div class="detail-card">
+            <h3>Medicinal Properties</h3>
+            <ul class="property-list">
+                {% for prop in herb.properties %}
+                <li>{{ prop }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="detail-card">
+            <h3>Uses & Benefits</h3>
+            <ul class="property-list">
+                {% for use in herb.uses %}
+                <li>{{ use }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="detail-card">
+            <h3>Preparation Methods</h3>
+            <p>{{ herb.preparation }}</p>
+        </div>
+        <div class="detail-card">
+            <h3>Recommended Dosage</h3>
+            <p>{{ herb.dosage }}</p>
+        </div>
+        <div class="detail-card">
+            <h3>Contraindications</h3>
+            <p class="warning-text">{{ herb.contraindications }}</p>
+        </div>
+    </div>
+
+    <div class="herb-actions">
+        <a href="{{ url_for('recommendation') }}" class="btn btn-secondary">Back to Recommendations</a>
+        <a href="{{ url_for('disease') }}" class="btn btn-primary">Find More Herbs</a>
+    </div>
+</section>
+{% else %}
+<section class="empty-state">
+    <span class="empty-icon">🌿</span>
+    <h3>Herb Not Found</h3>
+    <p>The herb you're looking for doesn't exist in our database.</p>
+    <a href="{{ url_for('disease') }}" class="btn btn-primary">Browse Diseases</a>
+</section>
+{% endif %}
+{% endblock %}

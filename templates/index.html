@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Herbal Recommendation System{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Discover the Power of <span class="highlight">Herbal Medicine</span></h1>
+        <p>Get personalized herb recommendations based on your health condition, backed by traditional Ayurvedic knowledge and modern electronic tongue analysis.</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('disease') }}" class="btn btn-primary">Find Herbs by Disease</a>
+            <a href="{{ url_for('electronic_tongue') }}" class="btn btn-secondary">Try E-Tongue Analysis</a>
+        </div>
+    </div>
+    <div class="hero-stats">
+        <div class="stat-card">
+            <span class="stat-number">{{ herbs|length }}</span>
+            <span class="stat-label">Herbs in Database</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">{{ diseases|length }}</span>
+            <span class="stat-label">Diseases Covered</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Taste Profiles</span>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <h2 class="section-title">How It Works</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <h3>Select Your Condition</h3>
+            <p>Browse our database of common diseases and health conditions to find what applies to you.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌱</div>
+            <h3>Get Recommendations</h3>
+            <p>Receive curated herb suggestions with dosage, preparation methods, and scientific details.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👅</div>
+            <h3>E-Tongue Analysis</h3>
+            <p>Our electronic tongue sensor analyzes taste profiles to match herbs with precision.</p>
+        </div>
+    </div>
+</section>
+
+<section class="popular-herbs">
+    <h2 class="section-title">Popular Herbs</h2>
+    <div class="herb-grid">
+        {% for herb in herbs[:6] %}
+        <a href="{{ url_for('herb', herb_id=herb.id) }}" class="herb-card">
+            <div class="herb-card-header">
+                <span class="herb-emoji">{{ herb.emoji }}</span>
+                <h3>{{ herb.name }}</h3>
+            </div>
+            <p class="herb-scientific"><em>{{ herb.scientific_name }}</em></p>
+            <p class="herb-desc">{{ herb.description[:80] }}...</p>
+            <span class="herb-tag">{{ herb.taste }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Ready to Find Your Herbal Remedy?</h2>
+    <p>Start by selecting a disease or use our electronic tongue for advanced analysis.</p>
+    <a href="{{ url_for('recommendation') }}" class="btn btn-primary">Get Started</a>
+</section>
+{% endblock %}

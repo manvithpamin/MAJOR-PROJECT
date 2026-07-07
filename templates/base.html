@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Herbal Recommendation System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('home') }}" class="nav-logo">
+                <span class="logo-icon">🌿</span>
+                <span>HerbalCare</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active"{% endif %}>Home</a></li>
+                <li><a href="{{ url_for('disease') }}" {% if request.endpoint == 'disease' %}class="active"{% endif %}>Diseases</a></li>
+                <li><a href="{{ url_for('recommendation') }}" {% if request.endpoint == 'recommendation' %}class="active"{% endif %}>Recommendations</a></li>
+                <li><a href="{{ url_for('electronic_tongue') }}" {% if request.endpoint == 'electronic_tongue' %}class="active"{% endif %}>E-Tongue</a></li>
+                <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>About</a></li>
+                <li><a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>HerbalCare</h3>
+                <p>AI-powered herbal recommendations backed by traditional knowledge and electronic tongue analysis.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{{ url_for('disease') }}">Browse Diseases</a></li>
+                    <li><a href="{{ url_for('recommendation') }}">Get Recommendations</a></li>
+                    <li><a href="{{ url_for('electronic_tongue') }}">E-Tongue Analysis</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Disclaimer</h4>
+                <p>This system is for educational purposes. Always consult a healthcare professional before using herbal remedies.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Herbal Recommendation System. Major Project.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

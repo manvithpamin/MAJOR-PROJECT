@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Electronic Tongue - Herbal Recommendation System{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>Electronic Tongue Analysis</h1>
+    <p>Advanced taste profiling using sensor technology for precise herb matching</p>
+</section>
+
+<section class="etongue-intro">
+    <div class="etongue-info">
+        <h2>What is an Electronic Tongue?</h2>
+        <p>An electronic tongue (E-Tongue) is a sensor array device that mimics human taste perception. It analyzes liquid samples across six basic taste profiles — sweet, sour, salty, bitter, umami, and astringent — to classify and match herbal compounds with high accuracy.</p>
+        <ul class="feature-list">
+            <li>Multi-sensor array for comprehensive taste analysis</li>
+            <li>Pattern recognition using machine learning</li>
+            <li>Objective, reproducible taste profiling</li>
+            <li>Integration with herbal recommendation engine</li>
+        </ul>
+    </div>
+    <div class="etongue-diagram">
+        <div class="taste-wheel">
+            <div class="taste-item" data-taste="sweet">Sweet</div>
+            <div class="taste-item" data-taste="sour">Sour</div>
+            <div class="taste-item" data-taste="salty">Salty</div>
+            <div class="taste-item" data-taste="bitter">Bitter</div>
+            <div class="taste-item" data-taste="umami">Umami</div>
+            <div class="taste-item" data-taste="astringent">Astringent</div>
+        </div>
+    </div>
+</section>
+
+<section class="etongue-analyzer">
+    <h2 class="section-title">Taste Profile Analyzer</h2>
+    <p class="section-subtitle">Simulate an E-Tongue reading by adjusting taste sliders below</p>
+
+    <div class="analyzer-container">
+        <div class="sliders-panel">
+            {% for taste in tastes %}
+            <div class="slider-group">
+                <label for="taste-{{ taste.id }}">{{ taste.name }}</label>
+                <input type="range" id="taste-{{ taste.id }}" class="taste-slider"
+                       min="0" max="100" value="0" data-taste="{{ taste.id }}">
+                <span class="slider-value" id="val-{{ taste.id }}">0%</span>
+            </div>
+            {% endfor %}
+            <button id="analyze-btn" class="btn btn-primary">Analyze Profile</button>
+        </div>
+
+        <div class="results-panel" id="results-panel">
+            <h3>Analysis Results</h3>
+            <div id="results-content" class="results-placeholder">
+                <p>Adjust the taste sliders and click "Analyze Profile" to see matched herbs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="etongue-herbs">
+    <h2 class="section-title">Herb Taste Profiles</h2>
+    <div class="taste-profile-grid">
+        {% for herb in herbs %}
+        <div class="taste-profile-card">
+            <span class="herb-emoji">{{ herb.emoji }}</span>
+            <h4>{{ herb.name }}</h4>
+            <div class="mini-bars">
+                {% for taste_key, value in herb.taste_profile.items() %}
+                <div class="mini-bar-row">
+                    <span>{{ taste_key|capitalize }}</span>
+                    <div class="mini-bar"><div class="mini-bar-fill" style="width: {{ value }}%"></div></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    const herbProfiles = {{ herbs|tojson }};
+</script>
+{% endblock %}

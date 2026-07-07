@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}About - Herbal Recommendation System{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>About This Project</h1>
+    <p>An intelligent herbal recommendation system combining tradition with technology</p>
+</section>
+
+<section class="about-content">
+    <div class="about-section">
+        <h2>Project Overview</h2>
+        <p>The Herbal Recommendation System is a major project that bridges the gap between traditional herbal medicine and modern sensor technology. It helps users discover appropriate herbal remedies based on their health conditions, enriched with data from electronic tongue analysis.</p>
+    </div>
+
+    <div class="about-section">
+        <h2>Objectives</h2>
+        <div class="objective-grid">
+            <div class="objective-card">
+                <h3>📚 Knowledge Base</h3>
+                <p>Build a comprehensive database of herbs, diseases, and their relationships based on Ayurvedic and modern pharmacological data.</p>
+            </div>
+            <div class="objective-card">
+                <h3>🤖 Smart Recommendations</h3>
+                <p>Provide intelligent herb recommendations mapped to specific diseases with dosage and preparation guidance.</p>
+            </div>
+            <div class="objective-card">
+                <h3>👅 E-Tongue Integration</h3>
+                <p>Leverage electronic tongue sensor data for objective taste profiling and improved herb matching accuracy.</p>
+            </div>
+            <div class="objective-card">
+                <h3>🌐 Web Interface</h3>
+                <p>Deliver an accessible, user-friendly web platform for exploring herbal remedies and analysis results.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2>Technology Stack</h2>
+        <div class="tech-stack">
+            <div class="tech-item">
+                <strong>Backend</strong>
+                <span>Python, Flask</span>
+            </div>
+            <div class="tech-item">
+                <strong>Database</strong>
+                <span>MySQL</span>
+            </div>
+            <div class="tech-item">
+                <strong>Frontend</strong>
+                <span>HTML, CSS, JavaScript</span>
+            </div>
+            <div class="tech-item">
+                <strong>Hardware</strong>
+                <span>Electronic Tongue Sensor Array</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2>Methodology</h2>
+        <ol class="methodology-list">
+            <li>Collect and catalog herbal data from Ayurvedic texts and pharmacological databases</li>
+            <li>Map herbs to diseases based on traditional and evidence-based relationships</li>
+            <li>Profile herbs using electronic tongue sensor readings across six taste dimensions</li>
+            <li>Build a recommendation engine that matches user conditions to optimal herbs</li>
+            <li>Present results through an intuitive web-based interface</li>
+        </ol>
+    </div>
+</section>
+{% endblock %}

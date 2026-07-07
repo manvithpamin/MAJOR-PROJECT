@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Diseases - Herbal Recommendation System{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>Browse Diseases</h1>
+    <p>Select a disease to view recommended herbal remedies</p>
+</section>
+
+<section class="search-section">
+    <input type="text" id="disease-search" class="search-input" placeholder="Search diseases...">
+</section>
+
+<section class="disease-grid" id="disease-grid">
+    {% for disease in diseases %}
+    <div class="disease-card" data-name="{{ disease.name|lower }}">
+        <div class="disease-icon">{{ disease.emoji }}</div>
+        <h3>{{ disease.name }}</h3>
+        <p>{{ disease.description }}</p>
+        <div class="disease-meta">
+            <span class="badge">{{ disease.category }}</span>
+            <span class="herb-count">{{ disease.herb_count }} herbs</span>
+        </div>
+        <a href="{{ url_for('recommendation', disease=disease.id) }}" class="btn btn-sm">View Herbs</a>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}
